@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.Blazor;
+using Microsoft.AspNetCore.Identity;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1JpR2dGfV5yd0VDal5WTnRbUiweQnxTdEZiWX1bcXZVRWFVVEJ+Xw==");
 
@@ -20,9 +21,13 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
@@ -41,8 +46,21 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+SeedDatabase();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapBlazorHub();
 
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+
+void SeedDatabase()
+{
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+		dbInitializer.Initialize();
+	}
+}

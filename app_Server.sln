@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_Client", "..\app_Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_Models", "..\app_Models\app_Models.csproj", "{4159E52A-B8EE-42FF-BCEF-A1CC01C7F0BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_Business", "..\app_Business\app_Business.csproj", "{06C63DB6-A5E7-4B83-9DF2-B75E742B3CF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_Business", "..\app_Business\app_Business.csproj", "{06C63DB6-A5E7-4B83-9DF2-B75E742B3CF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_Common", "..\app_Common\app_Common.csproj", "{6F4195D3-2E5B-4C08-8BA2-B00CCAA726CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_Common", "..\app_Common\app_Common.csproj", "{6F4195D3-2E5B-4C08-8BA2-B00CCAA726CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app_DataAccess", "..\app_DataAccess\app_DataAccess.csproj", "{ABB29F02-C48F-43AE-BCA0-391ABC5AFF09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "app_DataAccess", "..\app_DataAccess\app_DataAccess.csproj", "{ABB29F02-C48F-43AE-BCA0-391ABC5AFF09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppWeb_API", "..\AppWeb_API\AppWeb_API.csproj", "{0C93DE26-E0B8-4041-A60B-EA0565B8639B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppWeb_API", "..\AppWeb_API\AppWeb_API.csproj", "{0C93DE26-E0B8-4041-A60B-EA0565B8639B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

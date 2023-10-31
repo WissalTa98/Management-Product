@@ -6,6 +6,7 @@
 @inject IFileUpload _fileUpload
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jsRuntime
+@attribute [Authorize]
 
 <div class="row my-2">
 	<h3 class="card-title text-primary mb-3 ml-3">@Title Product</h3>
@@ -14,7 +15,7 @@
 		@if (IsLoading)
 		{
 			<div class="text-center">
-				<img src="/images/sp.gif" />
+				<img src="/images/sp.gif">
 			</div>
 		}
 		else
@@ -35,11 +36,9 @@
 
 				<div class="form-group">
 					<label>Description</label>
-					<SfRichTextEditor @bind-Value="Product.Description" class="form-control"></SfRichTextEditor>
-@*					<SfRichTextEditor @bind-Value="Product.Description"></SfRichTextEditor>
-*@					<ValidationMessage For="()=>Product.Description"></ValidationMessage>
+					<SfRichTextEditor @bind-Value="Product.Description"></SfRichTextEditor>
+					<ValidationMessage For="()=>Product.Description"></ValidationMessage>
 				</div>
-
 
 				<div class="row pt-3">
 					<div class="form-group col-6">
@@ -85,6 +84,7 @@
 </div>
 
 @code {
+
 	[Parameter]
 	public int Id { get; set; }
 
@@ -113,6 +113,7 @@
 		Categories = await _categoryRepository.GetAll();
 		if (Id != 0)
 		{
+			//update
 			Title = "Update";
 			Product = await _productRepository.Get(Id);
 			OldImageUrl = Product.ImageUrl;
@@ -125,11 +126,13 @@
 	{
 		if (Product.Id == 0)
 		{
+			//create
 			await _productRepository.Create(Product);
 			await _jsRuntime.ToastrSuccess("Product created successfully.");
 		}
 		else
 		{
+			//update
 			if (OldImageUrl != Product.ImageUrl)
 			{
 				_fileUpload.DeleteFile(OldImageUrl);
